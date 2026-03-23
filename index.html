@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instafin - Financial Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+    <!-- Sidebar -->
+    <div class="sidebar d-flex flex-column align-items-center bg-white shadow-sm border-end">
+        <div class="logo-container my-4 text-primary">
+            <i class="bi bi-speedometer2 fs-2"></i>
+        </div>
+        <nav class="nav nav-pills flex-column w-100 px-3 gap-3">
+            <a href="#" class="nav-link active d-flex flex-column align-items-center justify-content-center text-center section-toggle" data-target="dashboard" title="Dashboard">
+                <i class="bi bi-pie-chart fs-4 mb-1"></i>
+                <span class="fw-medium">Dashboard</span>
+            </a>
+            <a href="#" class="nav-link d-flex flex-column align-items-center justify-content-center text-center section-toggle" data-target="transactions" title="Transactions">
+                <i class="bi bi-arrow-left-right fs-4 mb-1"></i>
+                <span class="fw-medium">Transactions</span>
+            </a>
+            <a href="#" class="nav-link d-flex flex-column align-items-center justify-content-center text-center section-toggle" data-target="create-client" title="Create">
+                <i class="bi bi-plus-square fs-4 mb-1"></i>
+                <span class="fw-medium">Create</span>
+            </a>
+            <a href="#" class="nav-link d-flex flex-column align-items-center justify-content-center text-center section-toggle" data-target="clients" title="Clients">
+                <i class="bi bi-people fs-4 mb-1"></i>
+                <span class="fw-medium">Clients</span>
+            </a>
+             <a href="#" class="nav-link d-flex flex-column align-items-center justify-content-center text-center section-toggle" data-target="bulk-actions" title="Bulk Actions">
+                <i class="bi bi-lightning fs-4 mb-1"></i>
+                <span class="fw-medium">Bulk Actions</span>
+            </a>
+             <a href="#" class="nav-link d-flex flex-column align-items-center justify-content-center text-center section-toggle" data-target="reports" title="Reports">
+                <i class="bi bi-file-earmark-text fs-4 mb-1"></i>
+                <span class="fw-medium">Reports</span>
+            </a>
+            <a href="#" class="nav-link d-flex flex-column align-items-center justify-content-center text-center section-toggle" data-target="unions" title="Unions">
+                <i class="bi bi-list-task fs-4 mb-1"></i>
+                <span class="fw-medium">Unions</span>
+            </a>
+             <a href="#" class="nav-link d-flex flex-column align-items-center justify-content-center text-center section-toggle" data-target="accounting" title="Accounting">
+                <i class="bi bi-calculator fs-4 mb-1"></i>
+                <span class="fw-medium">Accounting</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-2 px-4 sticky-top shadow-sm">
+            <div class="container-fluid">
+                <span class="navbar-brand fw-bold mb-0 h1 fs-4 text-primary">Instafin</span>
+                <div class="ms-auto d-flex align-items-center gap-4">
+                    <div class="search-box me-3 position-relative">
+                        <i class="bi bi-search text-muted position-absolute start-0 top-50 translate-middle-y ms-2 opacity-75"></i>
+                        <input type="text" class="form-control form-control-sm bg-light border-0 ps-4 rounded-2" placeholder="Search anything..." style="width: 220px; height: 36px;">
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle py-1" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px; font-size: 0.8rem; font-weight: 600;">JT</div>
+                            <span class="small text-uppercase fw-bold" style="font-size: 0.7rem;">John Timothy</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="dropdownUser">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                    <i class="bi bi-bell text-muted fs-5 cursor-pointer hover-text-primary"></i>
+                    <i class="bi bi-star text-muted fs-5 cursor-pointer hover-text-primary"></i>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div class="contentArea py-4 px-4 px-lg-5">
+            <!-- Dashboard Section -->
+            <div id="section-dashboard" class="page-section active">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h3 fw-semibold m-0" style="color: #4a5568;">Dashboard</h1>
+                    <button class="btn btn-primary d-flex align-items-center gap-2 rounded-1 px-3 shadow-sm py-1">
+                        <i class="bi bi-funnel"></i>
+                        <span class="small fw-medium">Filter by organisation level</span>
+                    </button>
+                </div>
+
+            <div class="row g-4 mb-4">
+                <!-- Left Sidebar Components in Dashboard -->
+                <div class="col-lg-3">
+                     <!-- Tasks Card -->
+                    <div class="card border-0 shadow-sm rounded-1 mb-4">
+                        <div class="card-body p-3">
+                            <h6 class="text-uppercase small fw-bold text-primary mb-2">Tasks</h6>
+                            <p class="small text-muted m-0 mb-3">Number of pending tasks: <span class="fw-bold text-warning">0</span></p>
+                            
+                            <h6 class="text-uppercase small fw-bold text-primary mb-2 mt-4">Favorites</h6>
+                            <div class="list-group list-group-flush gap-1">
+                                <a href="#" class="list-group-item list-group-item-action border-0 px-0 py-1 small d-flex justify-content-between align-items-center text-primary">
+                                    Instafin - No permission <i class="bi bi-dash"></i>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 px-0 py-1 small d-flex justify-content-between align-items-center text-primary">
+                                    Instafin - Individual Client <i class="bi bi-dash"></i>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 px-0 py-1 small d-flex justify-content-between align-items-center text-primary">
+                                    Instafin - Combined Sheet <i class="bi bi-dash"></i>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0 px-0 py-1 small text-primary fw-medium">
+                                    Add new favorite +
+                                </a>
+                            </div>
+
+                             <h6 class="text-uppercase small fw-bold text-primary mb-2 mt-4 opacity-75">Instafin News</h6>
+                             <div class="small">
+                                <a href="#" class="text-primary d-block mb-1 text-decoration-none">Instafin 4.4.21 - 4.5.0 Release Notes</a>
+                                <a href="#" class="text-primary d-block mb-1 text-decoration-none">Lookups Hierarchy and Address Validation Guide</a>
+                                <a href="#" class="text-primary d-block mb-1 text-decoration-none">Address Validation Video Tutorial</a>
+                                <a href="#" class="text-primary d-block mb-1 text-decoration-none">Introducing Multicurrency - Video Tutorial 1</a>
+                                <a href="#" class="text-primary d-block mb-1 text-decoration-none">Multicurrency User Guide Articles</a>
+                                <a href="#" class="text-primary d-block text-decoration-none fw-medium">All news</a>
+                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Stream -->
+                    <div class="card border-0 shadow-sm rounded-1">
+                        <div class="card-body p-3">
+                             <h6 class="text-uppercase small fw-bold text-muted mb-3 border-bottom pb-2">Activity Stream</h6>
+                             <div class="activity-list" style="max-height: 400px; overflow-y: auto;">
+                                <!-- Activity Item -->
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <span class="small fw-bold text-primary">JOHN TIMOTHY</span>
+                                        <span class="small text-muted" style="font-size: 0.75rem;">logged in</span>
+                                    </div>
+                                    <div class="small text-muted" style="font-size: 0.7rem;">23 Mar 2026 10:53:25</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <span class="small fw-bold text-primary">JOHN TIMOTHY</span>
+                                        <span class="small text-muted" style="font-size: 0.75rem;">logged in</span>
+                                    </div>
+                                    <div class="small text-muted" style="font-size: 0.7rem;">22 Mar 2026 10:10:25</div>
+                                </div>
+                                <div class="mb-3 border-top pt-2">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <span class="small fw-bold text-primary">JOHN TIMOTHY</span>
+                                        <span class="small text-muted" style="font-size: 0.75rem;">logged in</span>
+                                    </div>
+                                    <div class="small text-muted" style="font-size: 0.7rem;">18 Mar 2026 15:55:04</div>
+                                </div>
+                                <div class="mb-3 border-top pt-2">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <span class="small fw-bold text-primary">JOHN TIMOTHY</span>
+                                        <span class="small text-muted" style="font-size: 0.75rem;">logged in</span>
+                                    </div>
+                                    <div class="small text-muted" style="font-size: 0.7rem;">18 Mar 2026 11:46:02</div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Row -->
+                <div class="col-lg-9">
+                    <div class="row g-4">
+                        <!-- Today's Snapshot -->
+                        <div class="col-md-8">
+                             <div class="card border-0 shadow-sm rounded-1 h-100">
+                                <div class="card-body p-4">
+                                     <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+                                         <h6 class="fw-bold text-muted m-0">System Snapshot</h6>
+                                         <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill small px-3">Today</span>
+                                     </div>
+                                     <div class="row g-4 mb-2">
+                                         <!-- Key Stats -->
+                                         <div class="col-6 col-sm-3 border-end">
+                                             <div class="d-flex align-items-center gap-3">
+                                                 <div class="stat-icon bg-blue-subtle text-primary rounded-3 p-2 d-none d-lg-block">
+                                                     <i class="bi bi-person-plus fs-5"></i>
+                                                 </div>
+                                                 <div>
+                                                     <div class="h4 fw-bold mb-0 text-primary">0</div>
+                                                     <div class="small-label text-muted text-uppercase">New Clients</div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         <div class="col-6 col-sm-3 border-end">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="stat-icon bg-info-subtle text-info rounded-3 p-2 d-none d-lg-block">
+                                                    <i class="bi bi-building fs-5"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="h4 fw-bold mb-0 text-dark">0</div>
+                                                    <div class="small-label text-muted text-uppercase">New Centres</div>
+                                                </div>
+                                            </div>
+                                         </div>
+                                         <div class="col-6 col-sm-3 border-end">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="stat-icon bg-warning-subtle text-warning rounded-3 p-2 d-none d-lg-block">
+                                                    <i class="bi bi-person-dash fs-5"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="h4 fw-bold mb-0 text-dark">0</div>
+                                                    <div class="small-label text-muted text-uppercase">Closed Clients</div>
+                                                </div>
+                                            </div>
+                                         </div>
+                                         <div class="col-6 col-sm-3">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="stat-icon bg-danger-subtle text-danger rounded-3 p-2 d-none d-lg-block">
+                                                    <i class="bi bi-file-earmark-lock fs-5"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="h4 fw-bold mb-0 text-dark">0</div>
+                                                    <div class="small-label text-muted text-uppercase">Closed Loans</div>
+                                                </div>
+                                            </div>
+                                         </div>
+                                     </div>
+
+                                     <div class="row mt-4 g-4 pt-3 border-top">
+                                         <!-- Main Amounts Grid -->
+                                         <div class="col-md-4 border-end">
+                                             <div class="p-3 bg-light rounded-3 h-100">
+                                                 <div class="d-flex align-items-center gap-2 mb-2">
+                                                     <i class="bi bi-arrow-down-left-circle text-success fs-6"></i>
+                                                     <span class="small text-muted text-uppercase fw-600">Repayments</span>
+                                                 </div>
+                                                 <div class="h5 fw-bold mb-0">₦ 0.00 <span class="small fw-normal text-muted">(0)</span></div>
+                                             </div>
+                                         </div>
+                                         <div class="col-md-4 border-end">
+                                             <div class="p-3 bg-light rounded-3 h-100">
+                                                 <div class="d-flex align-items-center gap-2 mb-2">
+                                                     <i class="bi bi-arrow-up-right-circle text-danger fs-6"></i>
+                                                     <span class="small text-muted text-uppercase fw-600">Disbursements</span>
+                                                 </div>
+                                                 <div class="h5 fw-bold mb-0">₦ 0.00 <span class="small fw-normal text-muted">(0)</span></div>
+                                             </div>
+                                         </div>
+                                         <div class="col-md-4">
+                                             <div class="p-3 bg-light rounded-3 h-100 border border-primary border-opacity-10" style="background-color: #eff6ff !important;">
+                                                 <div class="d-flex align-items-center gap-2 mb-2">
+                                                     <i class="bi bi-wallet2 text-primary fs-6"></i>
+                                                     <span class="small text-primary text-uppercase fw-600">Deposits</span>
+                                                 </div>
+                                                 <div class="h5 fw-bold mb-0 text-primary">₦ 0.00 <span class="small fw-normal text-muted">(0)</span></div>
+                                             </div>
+                                         </div>
+                                         
+                                         <div class="col-md-4 border-end">
+                                             <div class="p-3 bg-light rounded-3 h-100">
+                                                 <div class="d-flex align-items-center gap-2 mb-2">
+                                                     <i class="bi bi-clock-history text-warning fs-6"></i>
+                                                     <span class="small text-muted text-uppercase fw-600">Pending Deposits</span>
+                                                 </div>
+                                                 <div class="h5 fw-bold mb-0">₦ 0.00 <span class="small fw-normal text-muted">(0)</span></div>
+                                             </div>
+                                         </div>
+                                         <div class="col-md-4 border-end">
+                                             <div class="p-3 bg-light rounded-3 h-100">
+                                                 <div class="d-flex align-items-center gap-2 mb-2">
+                                                     <i class="bi bi-cash-stack text-danger fs-6"></i>
+                                                     <span class="small text-muted text-uppercase fw-600">Withdrawals</span>
+                                                 </div>
+                                                 <div class="h5 fw-bold mb-0">₦ 0.00 <span class="small fw-normal text-muted">(0)</span></div>
+                                             </div>
+                                         </div>
+                                         <div class="col-md-4">
+                                            <div class="p-3 border border-dashed rounded-3 h-100 d-flex align-items-center justify-content-center bg-white opacity-50">
+                                                <span class="small text-muted fst-italic">No more data</span>
+                                            </div>
+                                         </div>
+                                     </div>
+                                </div>
+                             </div>
+                        </div>
+                         <!-- Loan Accounts (Donut) -->
+                         <div class="col-md-4">
+                            <div class="card border-0 shadow-sm rounded-1 h-100">
+                                <div class="card-body p-4">
+                                    <h6 class="fw-bold text-muted mb-4 pb-2 border-bottom">Loan Accounts</h6>
+                                    <div class="position-relative" style="height: 200px;">
+                                        <canvas id="loanAccountsChart"></canvas>
+                                    </div>
+                                    <div class="d-flex justify-content-center gap-3 mt-3">
+                                        <div class="d-flex align-items-center gap-1">
+                                            <div class="rounded-pill" style="width: 10px; height: 10px; background: #28a745;"></div>
+                                            <span class="small text-muted">Active (54%)</span>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-1">
+                                            <div class="rounded-pill" style="width: 10px; height: 10px; background: #dc3545;"></div>
+                                            <span class="small text-muted">In Arrears (46%)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- Summary Stats -->
+                        <div class="col-md-8">
+                             <div class="card border-0 shadow-sm rounded-1 h-100">
+                                <div class="card-body p-4">
+                                     <h6 class="fw-bold text-muted mb-4 pb-2 border-bottom">Summary</h6>
+                                     <div class="row g-4">
+                                        <div class="col-sm-6 border-end">
+                                            <div class="mb-4">
+                                                <div class="h5 fw-bold mb-0">5,120</div>
+                                                <div class="small text-muted">Total Clients</div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <div class="h5 fw-bold mb-0">1,585</div>
+                                                <div class="small text-muted">Active Clients - 12 months</div>
+                                            </div>
+                                            <div>
+                                                <div class="h5 fw-bold mb-0">221</div>
+                                                <div class="small text-muted">Centres</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                             <div class="mb-4">
+                                                <div class="h5 fw-bold mb-0">825</div>
+                                                <div class="small text-muted">Active & In Arrears Clients</div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <div class="h5 fw-bold mb-0">1</div>
+                                                <div class="small text-muted">Branches</div>
+                                            </div>
+                                            <div>
+                                                <div class="h5 fw-bold mb-0">₦ 32,396,200.00 (1,335)</div>
+                                                <div class="small text-muted">Deposit Balance</div>
+                                            </div>
+                                        </div>
+                                     </div>
+                                     <div class="row mt-4 pt-4 border-top">
+                                        <div class="col-sm-6">
+                                            <div class="small fw-bold">₦ 61,528,149.83 (699)</div>
+                                            <div class="small text-muted">Loan Balance (P)</div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                             <div class="small fw-bold">₦ 72,571,500.00 (699)</div>
+                                            <div class="small text-muted">Loan Balance (P+I)</div>
+                                        </div>
+                                     </div>
+                                </div>
+                             </div>
+                        </div>
+
+                         <!-- Loans in Arrears (Multi-donut/Gauge) -->
+                         <div class="col-md-4">
+                            <div class="card border-0 shadow-sm rounded-1 h-100">
+                                <div class="card-body p-4">
+                                    <h6 class="fw-bold text-muted mb-4 pb-2 border-bottom">Loans In Arrears</h6>
+                                    <div class="position-relative" style="height: 200px;">
+                                        <canvas id="loansArrearsChart"></canvas>
+                                    </div>
+                                    <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+                                        <span class="small text-muted badge border text-dark fw-normal"><span class="bg-warning d-inline-block rounded-circle me-1" style="width:8px; height:8px;"></span> 1-30 (27%)</span>
+                                        <span class="small text-muted badge border text-dark fw-normal"><span class="bg-primary d-inline-block rounded-circle me-1" style="width:8px; height:8px;"></span> 31-60 (3%)</span>
+                                        <span class="small text-muted badge border text-dark fw-normal"><span class="bg-info d-inline-block rounded-circle me-1" style="width:8px; height:8px;"></span> 61-90 (2%)</span>
+                                        <span class="small text-muted badge border text-dark fw-normal"><span class="bg-danger d-inline-block rounded-circle me-1" style="width:8px; height:8px;"></span> 91-180 (9%)</span>
+                                        <span class="small text-muted badge border text-dark fw-normal"><span class="bg-dark d-inline-block rounded-circle me-1" style="width:8px; height:8px;"></span> 181-365 (17%)</span>
+                                        <span class="small text-muted badge border text-dark fw-normal"><span class="bg-success d-inline-block rounded-circle me-1" style="width:8px; height:8px;"></span> > 365 (39%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Width Components -->
+            <div class="row g-4 mt-2">
+                    <!-- Repayment Trend -->
+                    <div class="col-12">
+                         <div class="card border-0 shadow-sm rounded-1">
+                            <div class="card-body p-4">
+                                 <h6 class="fw-bold text-muted mb-4 pb-2 border-bottom d-flex justify-content-between">
+                                    <span>Repayment Trend</span>
+                                    <div class="d-flex gap-3">
+                                        <span class="small fw-normal"><i class="bi bi-square-fill text-success small me-1"></i> Actual</span>
+                                        <span class="small fw-normal"><i class="bi bi-square-fill text-primary small me-1"></i> Expected</span>
+                                    </div>
+                                 </h6>
+                                 <div style="height: 400px;">
+                                    <canvas id="repaymentTrendChart"></canvas>
+                                 </div>
+                            </div>
+                         </div>
+                    </div>
+
+                     <!-- Disbursement History -->
+                    <div class="col-12">
+                         <div class="card border-0 shadow-sm rounded-1">
+                            <div class="card-body p-4">
+                                 <h6 class="fw-bold text-muted mb-4 pb-2 border-bottom d-flex justify-content-between">
+                                    <span>Disbursement History</span>
+                                    <span class="small fw-normal"><i class="bi bi-square-fill text-info small me-1"></i> Disbursement Amount</span>
+                                 </h6>
+                                 <div style="height: 350px;">
+                                    <canvas id="disbursementHistoryChart"></canvas>
+                                 </div>
+                            </div>
+                         </div>
+                    </div>
+
+                    <!-- Loan Portfolio Table -->
+                    <div class="col-12">
+                        <div class="card border-0 shadow-sm rounded-1">
+                            <div class="card-body p-4">
+                                <h6 class="fw-bold text-muted mb-4 pb-2 border-bottom">Loan Portfolio</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle border-top">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th class="small fw-bold border-0 py-3">Days</th>
+                                                <th class="small fw-bold border-0 py-3">Overdue (P) (₦)</th>
+                                                <th class="small fw-bold border-0 py-3">Balance (P) (₦)</th>
+                                                <th class="small fw-bold border-0 py-3">Balance (P) %</th>
+                                                <th class="small fw-bold border-0 py-3 text-end">Accounts</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="small">
+                                            <tr>
+                                                <td>Active</td>
+                                                <td>₦ 0.00</td>
+                                                <td>₦ 41,292,539.87</td>
+                                                <td>67.10</td>
+                                                <td class="text-end">376</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1 - 30</td>
+                                                <td>₦ 1,169,854.40</td>
+                                                <td>₦ 6,055,505.68</td>
+                                                <td>9.80</td>
+                                                <td class="text-end">86</td>
+                                            </tr>
+                                            <tr>
+                                                <td>31 - 60</td>
+                                                <td>₦ 1,316,267.99</td>
+                                                <td>₦ 2,583,115.54</td>
+                                                <td>4.20</td>
+                                                <td class="text-end">25</td>
+                                            </tr>
+                                            <tr class="fw-bold border-top">
+                                                <td>Total</td>
+                                                <td>₦ 14,083,111.13</td>
+                                                <td>₦ 61,528,149.83</td>
+                                                <td>100.00</td>
+                                                <td class="text-end">699</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Corporate Clients Section -->
+            <div id="section-clients" class="page-section d-none">
+                 <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h3 fw-semibold m-0" style="color: #4a5568;">Corporate Clients</h1>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-info text-white d-flex align-items-center gap-2 rounded-1 px-3 shadow-sm py-1 small fw-medium">Create</button>
+                        <button class="btn btn-info text-white d-flex align-items-center gap-2 rounded-1 px-3 shadow-sm py-1 small fw-medium">Export</button>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm rounded-1 mb-4">
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="small text-muted fw-medium mb-1">Branch</label>
+                                <select class="form-select form-select-sm border-secondary-subtle">
+                                    <option>Okene</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="small text-muted fw-medium mb-1">Credit Officer</label>
+                                <select class="form-select form-select-sm border-secondary-subtle">
+                                    <option>Select...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="small text-muted fw-medium mb-1">Centre</label>
+                                <select class="form-select form-select-sm border-secondary-subtle">
+                                    <option>Select...</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <label class="small text-muted fw-medium mb-1 d-block">Status?</label>
+                                <select class="form-select form-select-sm border-secondary-subtle w-50">
+                                    <option>Select...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="small text-muted fw-medium mb-1">Name?</label>
+                                <input type="text" class="form-control form-control-sm border-secondary-subtle">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="small text-muted fw-medium mb-1">Email?</label>
+                                <input type="email" class="form-control form-control-sm border-secondary-subtle">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="small text-muted fw-medium mb-1">Mobile?</label>
+                                <input type="tel" class="form-control form-control-sm border-secondary-subtle">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button class="btn btn-primary rounded-1 px-4 py-1 small fw-medium">Filter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Client Section -->
+            <div id="section-create-client" class="page-section d-none">
+                 <div class="mb-4">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-1">
+                          <li class="breadcrumb-item small"><a href="#" class="text-decoration-none text-primary">Individual Clients</a></li>
+                          <li class="breadcrumb-item small active" aria-current="page">Create</li>
+                        </ol>
+                    </nav>
+                    <h1 class="h3 fw-semibold m-0" style="color: #1e293b;">Create Individual Client</h1>
+                </div>
+
+                <div class="card border-0 shadow-sm rounded-1 mb-5">
+                    <div class="card-body p-4 p-lg-5">
+                         <!-- BASIC INFORMATION -->
+                         <h6 class="text-uppercase fw-bold text-muted border-bottom section-title-premium">BASIC INFORMATION</h6>
+                         
+                         <p class="small text-muted mb-4 fw-bold">IMAGES</p>
+                         <div class="row g-4 mb-5">
+                            <div class="col-md-4">
+                                <label class="small text-muted mb-3 d-block">Profile Image</label>
+                                <div class="image-upload p-4 text-center rounded bg-light cursor-pointer border-dashed">
+                                    <div class="silhouette-placeholder mx-auto"></div>
+                                    <div class="mt-2 text-primary small d-flex align-items-center justify-content-center gap-2">
+                                        <i class="bi bi-camera fs-5"></i>
+                                        <div>
+                                            Drag and drop file here OR select a file from your computer OR capture image through camera
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="small text-muted mb-3 d-block">Signature Image</label>
+                                <div class="image-upload p-4 text-center rounded bg-light cursor-pointer border-dashed">
+                                    <div class="signature-placeholder mx-auto"></div>
+                                    <div class="mt-2 text-primary small d-flex align-items-center justify-content-center gap-2">
+                                        <i class="bi bi-camera fs-5"></i>
+                                        <div>
+                                            Drag and drop file here OR select a file from your computer OR capture image through camera
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+
+                         <div class="row g-4 mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Gender *</label>
+                                <select class="form-select form-select-premium shadow-none">
+                                    <option value="">Select...</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">First Name *</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Middle Name</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Last Name *</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Nickname</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Mother's Maiden Name</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Date of Birth</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-premium shadow-none" placeholder="dd/mm/yyyy">
+                                    <span class="input-group-text bg-white border-start-0 text-muted"><i class="bi bi-calendar3 small"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Marital Status</label>
+                                <select class="form-select form-select-premium shadow-none">
+                                    <option value="">Select...</option>
+                                    <option>Single</option>
+                                    <option>Married</option>
+                                </select>
+                            </div>
+                         </div>
+
+                         <!-- CONTACT INFORMATION -->
+                         <h6 class="text-uppercase fw-bold text-muted border-bottom section-title-premium mt-5">CONTACT INFORMATION</h6>
+                         <p class="small text-muted mb-3 fw-bold">ADDRESS</p>
+                         <div class="row g-4 mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Street 1 *</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Street 2</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Village</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">City *</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">State</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Country *</label>
+                                <input type="text" class="form-control form-control-premium shadow-none" value="Nigeria">
+                            </div>
+                         </div>
+
+                         <p class="small text-muted mb-3 fw-bold mt-4">SECOND ADDRESS</p>
+                         <div class="row g-4 mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Street 1</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Street 2</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Village</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">City</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">State</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                         </div>
+
+                         <div class="row g-4 mt-2">
+                             <div class="col-md-4">
+                                 <label class="form-label-premium">Length of Stay in Months</label>
+                                 <input type="number" class="form-control form-control-premium shadow-none">
+                             </div>
+                             <div class="col-md-4">
+                                 <label class="form-label-premium">E-Mail</label>
+                                 <input type="email" class="form-control form-control-premium shadow-none">
+                             </div>
+                             <div class="col-md-4">
+                                 <label class="form-label-premium">Mobile Phone *</label>
+                                 <div class="input-group">
+                                     <span class="input-group-text bg-light text-muted small fw-bold">NG +234 <i class="bi bi-chevron-down ms-1 mt-1"></i></span>
+                                     <input type="tel" class="form-control form-control-premium shadow-none">
+                                 </div>
+                             </div>
+                             <div class="col-md-4 d-flex align-items-center mb-0 mt-5">
+                                 <div class="form-check">
+                                     <input class="form-check-input border-secondary" type="checkbox" id="checkNotify" checked>
+                                     <label class="form-check-label small text-muted fw-medium" for="checkNotify">Enable Notifications</label>
+                                 </div>
+                             </div>
+                             <div class="col-md-4">
+                                 <label class="form-label-premium">Second Phone</label>
+                                 <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted small fw-bold">NG +234 <i class="bi bi-chevron-down ms-1 mt-1"></i></span>
+                                    <input type="tel" class="form-control form-control-premium shadow-none">
+                                 </div>
+                             </div>
+                         </div>
+
+                         <!-- BUSINESS INFORMATION -->
+                         <h6 class="text-uppercase fw-bold text-muted border-bottom section-title-premium mt-5">BUSINESS INFORMATION</h6>
+                         <div class="row g-4">
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Business Sector</label>
+                                <select class="form-select form-select-premium shadow-none">
+                                    <option value="">Select...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Employment Type</label>
+                                <select class="form-select form-select-premium shadow-none">
+                                    <option value="">Select...</option>
+                                    <option>Self-Employed</option>
+                                    <option>Salary Earners</option>
+                                    <option>Corporates</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Employment Status</label>
+                                <select class="form-select form-select-premium shadow-none">
+                                    <option value="">Select...</option>
+                                    <option>Permanent</option>
+                                    <option>Contract</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Employment Start Date</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-premium shadow-none" placeholder="dd/mm/yyyy">
+                                    <span class="input-group-text bg-white border-start-0 text-muted"><i class="bi bi-calendar3 small"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="small text-muted mb-2 d-block fw-bold mt-2">Owned Businesses</label>
+                                <button class="btn btn-primary rounded-1 px-4 py-1 small fw-medium" style="background-color: #0d6efd; border-color: #0d6efd;">Add a Business</button>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Annual Gross Income</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Monthly Income</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                         </div>
+
+                         <!-- NEXT OF KIN -->
+                         <h6 class="text-uppercase fw-bold text-muted border-bottom section-title-premium mt-5">NEXT OF KIN</h6>
+                         <div class="row g-4">
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Next of Kin</label>
+                                <select class="form-select form-select-premium shadow-none">
+                                    <option value="">Search...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-end">
+                                <div class="w-100">
+                                    <label class="form-label-premium">Nature of Relationship</label>
+                                    <select class="form-select form-select-premium shadow-none">
+                                        <option value="">Select...</option>
+                                        <option>Father</option>
+                                        <option>Mother</option>
+                                        <option>Brother</option>
+                                        <option>Sister</option>
+                                        <option>Spouse</option>
+                                    </select>
+                                </div>
+                            </div>
+                         </div>
+
+                         <!-- ASSIGN TO -->
+                         <h6 class="text-uppercase fw-bold text-muted border-bottom section-title-premium mt-5">ASSIGN TO</h6>
+                         <div class="row g-4">
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Branch *</label>
+                                <select class="form-select form-select-premium shadow-none">
+                                    <option>Okene</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Credit Officer *</label>
+                                <select class="form-select form-select-premium shadow-none">
+                                    <option value="">Select...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Centre *</label>
+                                <select class="form-select form-select-premium shadow-none">
+                                    <option value="">Select...</option>
+                                </select>
+                            </div>
+                         </div>
+
+                         <!-- CLIENT CUSTOM FIELDS -->
+                         <h6 class="text-uppercase fw-bold text-muted border-bottom section-title-premium mt-5">CLIENT CUSTOM FIELDS</h6>
+                         <div class="row g-4">
+                            <div class="col-md-4">
+                                <label class="form-label-premium">National Identification Number</label>
+                                <input type="text" class="form-control form-control-premium shadow-none" placeholder="00000000000">
+                            </div>
+                         </div>
+
+                         <!-- PERSON CUSTOM FIELDS -->
+                         <h6 class="text-uppercase fw-bold text-muted border-bottom section-title-premium mt-5">PERSON CUSTOM FIELDS</h6>
+                         <div class="row g-4">
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Bank Verification Number</label>
+                                <input type="text" class="form-control form-control-premium shadow-none" placeholder="00000000000">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Voters Identification Number</label>
+                                <input type="text" class="form-control form-control-premium shadow-none">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">UNION NUMBER</label>
+                                <select class="form-select form-select-premium shadow-none">
+                                    <option value="">Select...</option>
+                                </select>
+                            </div>
+                         </div>
+
+                         <!-- ADDITIONAL -->
+                         <h6 class="text-uppercase fw-bold text-muted border-bottom section-title-premium mt-5">ADDITIONAL</h6>
+                         <div class="row g-4 mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Created On *</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-premium shadow-none" placeholder="dd/mm/yyyy">
+                                    <span class="input-group-text bg-white border-start-0 text-muted"><i class="bi bi-calendar3 small"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Membership Admission Date</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-premium shadow-none" placeholder="dd/mm/yyyy">
+                                    <span class="input-group-text bg-white border-start-0 text-muted"><i class="bi bi-calendar3 small"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-premium">Membership Resignation Date</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-premium shadow-none" placeholder="dd/mm/yyyy">
+                                    <span class="input-group-text bg-white border-start-0 text-muted"><i class="bi bi-calendar3 small"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-premium">Notes</label>
+                                <textarea class="form-control form-control-premium shadow-none" rows="3"></textarea>
+                            </div>
+                         </div>
+
+                         <div class="mt-5 pt-4 border-top d-flex gap-2">
+                             <button class="btn btn-info text-white rounded-1 px-4 py-2 small fw-bold" style="min-width: 120px;">Create</button>
+                             <button class="btn btn-light border rounded-1 px-4 py-2 small fw-bold" style="min-width: 100px;">Cancel</button>
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bulk Actions Section -->
+            <div id="section-bulk-actions" class="page-section d-none">
+                 <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h3 fw-semibold m-0" style="color: #4a5568;">Bulk Actions</h1>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm rounded-1 text-center p-4">
+                            <i class="bi bi-cloud-upload fs-1 text-primary mb-3"></i>
+                            <h6 class="fw-bold mb-2">Import Clients</h6>
+                            <p class="small text-muted mb-3">Bulk upload individual or corporate clients using a CSV/Excel template.</p>
+                            <button class="btn btn-outline-primary btn-sm rounded-1 px-4">Download Template</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm rounded-1 text-center p-4">
+                            <i class="bi bi-cash-stack fs-1 text-success mb-3"></i>
+                            <h6 class="fw-bold mb-2">Bulk Disbursement</h6>
+                            <p class="small text-muted mb-3">Disburse loans to multiple clients simultaneously using a batch file.</p>
+                            <button class="btn btn-outline-success btn-sm rounded-1 px-4">Start Batch</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm rounded-1 text-center p-4">
+                            <i class="bi bi-receipt fs-1 text-info mb-3"></i>
+                            <h6 class="fw-bold mb-2">Bulk Repayment</h6>
+                            <p class="small text-muted mb-3">Log repayments for an entire center or union in a single view.</p>
+                            <button class="btn btn-outline-info btn-sm rounded-1 px-4">Open Sheet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="section-reports" class="page-section d-none">
+                 <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h3 fw-semibold m-0" style="color: #4a5568;">Reports</h1>
+                    <button class="btn btn-primary btn-sm rounded-1 px-3 shadow-sm d-flex align-items-center gap-2">
+                        <i class="bi bi-plus"></i> New Custom Report
+                    </button>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="list-group list-group-flush shadow-sm rounded-1 bg-white small">
+                            <a href="#" class="list-group-item list-group-item-action active border-0 py-3">Financial Reports</a>
+                            <a href="#" class="list-group-item list-group-item-action border-0 py-3">Operational Reports</a>
+                            <a href="#" class="list-group-item list-group-item-action border-0 py-3">Client Reports</a>
+                            <a href="#" class="list-group-item list-group-item-action border-0 py-3">Audit Reports</a>
+                            <a href="#" class="list-group-item list-group-item-action border-0 py-3">Custom Reports</a>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card border-0 shadow-sm rounded-1">
+                            <div class="card-body p-4">
+                                <h6 class="fw-bold text-muted mb-4 border-bottom pb-2">Financial Reports</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="p-3 border rounded-1 d-flex justify-content-between align-items-center hover-bg-light cursor-pointer">
+                                            <div>
+                                                <div class="fw-bold small mb-1">Balance Sheet</div>
+                                                <div class="text-muted" style="font-size: 0.7rem;">Summary of assets, liabilities, and equity.</div>
+                                            </div>
+                                            <i class="bi bi-chevron-right text-muted"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-3 border rounded-1 d-flex justify-content-between align-items-center hover-bg-light cursor-pointer">
+                                            <div>
+                                                <div class="fw-bold small mb-1">Profit and Loss Statement</div>
+                                                <div class="text-muted" style="font-size: 0.7rem;">Revenue and expenses overview over a period.</div>
+                                            </div>
+                                            <i class="bi bi-chevron-right text-muted"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-3 border rounded-1 d-flex justify-content-between align-items-center hover-bg-light cursor-pointer">
+                                            <div>
+                                                <div class="fw-bold small mb-1">Trial Balance</div>
+                                                <div class="text-muted" style="font-size: 0.7rem;">List of all ledger accounts and their balances.</div>
+                                            </div>
+                                            <i class="bi bi-chevron-right text-muted"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-3 border rounded-1 d-flex justify-content-between align-items-center hover-bg-light cursor-pointer">
+                                            <div>
+                                                <div class="fw-bold small mb-1">Cash Flow Statement</div>
+                                                <div class="text-muted" style="font-size: 0.7rem;">Tracking movements of cash in and out.</div>
+                                            </div>
+                                            <i class="bi bi-chevron-right text-muted"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accounting Section -->
+            <div id="section-accounting" class="page-section d-none">
+                 <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h3 fw-semibold m-0" style="color: #4a5568;">Accounting</h1>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="card border-0 shadow-sm rounded-1 mb-4">
+                            <div class="card-body p-4">
+                                <h6 class="fw-bold text-muted mb-4 border-bottom pb-2">Chart of Accounts</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle border-top">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th class="small fw-bold border-0">Code</th>
+                                                <th class="small fw-bold border-0">Account Name</th>
+                                                <th class="small fw-bold border-0">Type</th>
+                                                <th class="small fw-bold border-0 text-end">Balance (₦)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="small">
+                                            <tr>
+                                                <td>1000</td>
+                                                <td>Petty Cash</td>
+                                                <td>Asset</td>
+                                                <td class="text-end">50,000.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1100</td>
+                                                <td>Main Bank Account</td>
+                                                <td>Asset</td>
+                                                <td class="text-end">12,450,200.50</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2000</td>
+                                                <td>Accounts Payable</td>
+                                                <td>Liability</td>
+                                                <td class="text-end">1,200,000.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3000</td>
+                                                <td>Retained Earnings</td>
+                                                <td>Equity</td>
+                                                <td class="text-end">8,500,000.00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                         <div class="card border-0 shadow-sm rounded-1 mb-4 bg-primary text-white">
+                            <div class="card-body p-4 text-center">
+                                <i class="bi bi-journal-plus fs-1 mb-2"></i>
+                                <h6 class="fw-bold">Journal Entry</h6>
+                                <p class="small opacity-75 mb-3">Record manual accounting entries for adjustments or special transactions.</p>
+                                <button class="btn btn-light btn-sm rounded-1 px-4 fw-bold text-primary">Add Entry</button>
+                            </div>
+                        </div>
+                        <div class="card border-0 shadow-sm rounded-1 mb-4">
+                            <div class="card-body p-3">
+                                <h6 class="text-uppercase small fw-bold text-muted mb-3 border-bottom pb-2">Quick Access</h6>
+                                <ul class="list-unstyled small">
+                                    <li class="mb-2"><a href="#" class="text-decoration-none text-danger d-flex align-items-center gap-2"><i class="bi bi-dot"></i> Close Financial Period</a></li>
+                                    <li class="mb-2"><a href="#" class="text-decoration-none text-primary d-flex align-items-center gap-2"><i class="bi bi-dot"></i> Bank Reconciliation</a></li>
+                                    <li class="mb-2"><a href="#" class="text-decoration-none text-primary d-flex align-items-center gap-2"><i class="bi bi-dot"></i> Tax Configuration</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unions Section -->
+            <div id="section-unions" class="page-section d-none">
+                 <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h3 fw-semibold m-0" style="color: #4a5568;">Unions</h1>
+                    <div class="d-flex gap-1">
+                        <button class="btn btn-info text-white d-flex align-items-center gap-2 rounded-1 px-3 shadow-sm py-1 small fw-medium">Create</button>
+                        <button class="btn btn-info text-white d-flex align-items-center gap-2 rounded-1 px-3 shadow-sm py-1 small fw-medium">Export</button>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm rounded-1 mb-4">
+                    <div class="card-body p-4 pb-1">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="small text-muted fw-medium mb-1">Branch</label>
+                                <select class="form-select form-select-sm border-secondary-subtle">
+                                    <option>Select...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="small text-muted fw-medium mb-1">Credit Officer</label>
+                                <select class="form-select form-select-sm border-secondary-subtle">
+                                    <option>Select...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="small text-muted fw-medium mb-1">Status</label>
+                                <select class="form-select form-select-sm border-secondary-subtle">
+                                    <option>Select...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-4 mb-2">
+                            <button class="btn btn-primary rounded-1 px-4 py-1 small fw-medium">Filter</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm rounded-1">
+                    <div class="card-body p-0">
+                        <div class="d-flex justify-content-end p-3">
+                            <div class="search-box position-relative" style="width: 250px;">
+                                <i class="bi bi-search text-muted position-absolute start-0 top-50 translate-middle-y ms-2 opacity-50"></i>
+                                <input type="text" class="form-control form-control-sm ps-4" placeholder="Search...">
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th class="small fw-bold border-0 py-3 ps-4">ID</th>
+                                        <th class="small fw-bold border-0 py-3">Union Name</th>
+                                        <th class="small fw-bold border-0 py-3">Meeting Day</th>
+                                        <th class="small fw-bold border-0 py-3">Meeting Time</th>
+                                        <th class="small fw-bold border-0 py-3">Credit Officer</th>
+                                        <th class="small fw-bold border-0 py-3">Branch</th>
+                                        <th class="small fw-bold border-0 py-3">Status</th>
+                                        <th class="small fw-bold border-0 py-3 pe-4 text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="small">
+                                    <tr>
+                                        <td class="ps-4 text-primary fw-medium">C044558</td>
+                                        <td>ADOVIDI</td>
+                                        <td>Friday</td>
+                                        <td>—</td>
+                                        <td>SENEWO FLORENCE</td>
+                                        <td class="text-primary text-decoration-underline">Okene</td>
+                                        <td><span class="badge badge-active rounded-pill px-2 py-1"><i class="bi bi-dot"></i> ACTIVE</span></td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-info text-white py-0 px-2"><i class="bi bi-eye"></i></button>
+                                                <button class="btn btn-sm btn-info text-white py-0 px-2"><i class="bi bi-pencil"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-4 text-primary fw-medium">G235160</td>
+                                        <td>AHUOYIZA</td>
+                                        <td>Wednesday</td>
+                                        <td>09:30:00</td>
+                                        <td>SENEWO FLORENCE</td>
+                                        <td class="text-primary text-decoration-underline">Okene</td>
+                                        <td><span class="badge badge-inactive rounded-pill px-2 py-1"><i class="bi bi-dot"></i> INACTIVE</span></td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-info text-white py-0 px-2"><i class="bi bi-eye"></i></button>
+                                                <button class="btn btn-sm btn-info text-white py-0 px-2"><i class="bi bi-pencil"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-3 border-top d-flex justify-content-between align-items-center">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination pagination-sm mb-0">
+                                    <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
+                                    <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">»</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Section -->
+            <div id="section-transactions" class="page-section d-none">
+                 <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h3 fw-semibold m-0" style="color: #4a5568;">Transactions</h1>
+                    <button class="btn btn-primary btn-sm rounded-1 px-3 d-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#transactionModal">
+                        <i class="bi bi-plus-circle"></i> New Transaction
+                    </button>
+                </div>
+
+                <div class="card border-0 shadow-sm rounded-1">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th class="small fw-bold border-0 py-3 ps-4">Ref ID</th>
+                                        <th class="small fw-bold border-0 py-3">Date</th>
+                                        <th class="small fw-bold border-0 py-3">Client</th>
+                                        <th class="small fw-bold border-0 py-3">Type</th>
+                                        <th class="small fw-bold border-0 py-3">Amount (₦)</th>
+                                        <th class="small fw-bold border-0 py-3 pe-4 text-end">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="small">
+                                    <tr>
+                                        <td class="ps-4">TRX-101292</td>
+                                        <td>23 Mar 2026</td>
+                                        <td>ADEBAYO SAMUEL</td>
+                                        <td><span class="text-success fw-medium">Repayment</span></td>
+                                        <td>15,000.00</td>
+                                        <td class="pe-4 text-end"><span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-4">TRX-101293</td>
+                                        <td>23 Mar 2026</td>
+                                        <td>NGOZI OKONJO</td>
+                                        <td><span class="text-primary fw-medium">Deposit</span></td>
+                                        <td>5,000.00</td>
+                                        <td class="pe-4 text-end"><span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-4">TRX-101294</td>
+                                        <td>22 Mar 2026</td>
+                                        <td>ABDULLAHI MUSA</td>
+                                        <td><span class="text-danger fw-medium">Withdrawal</span></td>
+                                        <td>2,000.00</td>
+                                        <td class="pe-4 text-end"><span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-2">Pending</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transaction Modal -->
+    <div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 16px;">
+                <div class="modal-header border-bottom-0 pb-0 px-4 pt-4">
+                    <h1 class="modal-title fs-5 fw-bold text-dark" id="transactionModalLabel">New Transaction</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body py-4 px-4">
+                    <div class="mb-4">
+                        <label class="small fw-bold text-uppercase text-muted mb-2 d-block" style="letter-spacing: 0.05em;">Transaction Type *</label>
+                        <select class="form-select border-light-subtle bg-light-subtle py-2">
+                            <option selected disabled>Choose type...</option>
+                            <option>Repayment</option>
+                            <option>Disbursement</option>
+                            <option>Deposit</option>
+                            <option>Withdrawal</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0 pb-4 px-4">
+                    <button type="button" class="btn btn-light px-4 py-2 fw-medium text-muted rounded-2" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary px-4 py-2 fw-bold rounded-2">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
